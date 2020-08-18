@@ -10,6 +10,7 @@ class User(DB.Model):
 
     # to do a one to many, we don't need ref from user to tweet, instead
     # we need an user id for every tweet
+    # newest_tweet_id = DB.Column(DB.BigInteger)
 
     def __repr__(self):
         return '-User {}-'.format(self.name)
@@ -20,13 +21,14 @@ class User(DB.Model):
 class Tweet(DB.Model):
     """Tweets."""
     id = DB.Column(DB.BigInteger, primary_key=True)
-    text = DB.Column(DB.Unicode(280))
+    text = DB.Column(DB.Unicode(300))
     # we have a foreign key
     user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'), nullable=False)
     # tweet.user, we can get user directly
     # user will have a tweets field --- will not be stored in data based, but
     # loaded lazily
-    # That's the job of backref: when we interact --instanc class the user class will have a tweet field and the
+    # embedding = DB.Column(DB.PickleType, nullable=False)
+    # That's the job of backref: when we interact --instance class the user class will have a tweet field and the
     # twee class will have a user field.
     user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
 
@@ -62,5 +64,4 @@ def insert_example_users():
     DB.session.add(t4)
     DB.session.add(t5)
     DB.session.add(t6)
-
     DB.session.commit()
