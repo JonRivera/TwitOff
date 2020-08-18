@@ -1,4 +1,4 @@
-"""Entry point for Twitoff."""
+"""Entry point for Twitoff Application ."""
 from .app import create_app
 
-APP = create_app
+APP = create_app()
