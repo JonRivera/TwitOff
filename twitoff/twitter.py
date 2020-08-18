@@ -32,6 +32,8 @@ def add_or_update_user(username):
             count=200, exclude_replies=True, include_rts=False,
             tweet_mode='extended', since_id=db_user.newest_tweet_id
         )
+        # If we got new tweets then newest tweet for that user, is the new id for
+        # the newest id we got.
         if tweets:
             db_user.newest_tweet_id = tweets[0].id
         for tweet in tweets:
@@ -46,3 +48,10 @@ def add_or_update_user(username):
         raise e
     else:
         DB.session.commit()
+
+
+def insert_example_users():
+    # Making Users)
+    add_or_update_user('austen')
+    add_or_update_user('elonmusk')
+    add_or_update_user('jonny')
