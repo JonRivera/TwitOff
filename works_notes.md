@@ -9,10 +9,15 @@ What was the most challenging part of the work today, and why?
 Encountering bugs were minor issues. Also, just in general getting used flask, the syntax, and understanding the HTML and the different steps
 Aaron performed in lecture. 
 
-08/18
+08/18 Consuming Data w/ API
 What went well (in the context of working on the assignment) today?
+It was pretty cool to upload basillica embedings into the SQL data base;lastly, downloading Twitter user's tweets into the table, is something that Is new to me, but was very interesting to implement.
+
 What was particularly interesting or surprising about the topic(s) today?
+Before todays unit, It always felt like a mystery hearing how programmers can transform pictures into code.Now, I have a vague but slight understanding of whats going on with the basillica embeddings.
+
 What was the most challenging part of the work today, and why?
+Following the instructors python logic. Largely b/c I am still fairly new at working with apis as stuff.
 
 
 08/19
