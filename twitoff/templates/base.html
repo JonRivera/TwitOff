@@ -27,10 +27,16 @@
         {% for user in users %}
         <a href="/user/{{ user.name }}"><span class="stack">{{ user.name }}</span></a>
         {% endfor %}
+
+        <h2> Users to Add</h2>
+        <form action="/user"method="post">
+          <input type="text" name="user_name" placeholder="User to add">
+          <input type="submit" value="Add User">
+        </form>
       </div>
       {% endblock %}
     </article>
-    <!-- Optional stretch - check out some front-end JavaScript! -->
+    <!-- Optional stretch - cdheck out some front-end JavaScript! -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/umbrellajs"/> -->
   </body>
 </html>

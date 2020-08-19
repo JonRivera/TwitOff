@@ -1,17 +1,19 @@
 from decouple import config
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from .twitter import insert_example_users
 from .model import DB, User
+from .twitter import add_or_update_user
 
 
 def create_app():
     """Create and configure an instance of the Flask application."""
     app = Flask(__name__)
     # Before whenever we created a user it just ran in memory
-    #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite3'
     app.config['SQLALCHEMY_DATABASE_URI'] = config('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['ENV'] = config('ENV')
+    # can't leave ENV like this based on documentation
+    # app.config['ENV'] = config('ENV')
     DB.init_app(app)  # initialise application, this is the data base, this is how u connect to it
 
     # persist data in that sql file
@@ -27,9 +29,34 @@ def create_app():
         insert_example_users()
         return render_template('base.html', title='Users updated!', users=User.query.all())
 
+    # decorating twice, decor are functions that take functions return functions
+    # to add users we need a post request
+    # to get users were going to need a get request
+    # The get request needs a parameter but the post doesn't, b/c when we add a use
+    # were going to have a form
+    # The name needs a default value,b/c might not exit, exist with get rec but not for post
+    @app.route('/user', methods=['POST'])
+    @app.route('/user/<name>', methods=['GET'])
+    def user(name=None):
+        message = ''
+        # semicolon lets u execute two statements in one line, set trace says enter pdb
+        # python debugger
+        # import pdb; pdb.set_trace()
+        name = name or request.values['user_name']
+        try:
+            if request.method == 'POST':
+                add_or_update_user(name)
+                message = 'USER {} successfully added!'.format(name)
+            tweets = User.query.filter(User.name == name).one().tweets
+        except Exception as e:
+            message = 'Error adding {}: {}'.format(name, e)
+            tweets = []
+        return render_template('user.html', title=name, tweets=tweets, message=message)
+
     @app.route('/reset')
     def reset():
         DB.drop_all()
         DB.create_all()
         return render_template('base.html', title='Reset database:')
+
     return app
