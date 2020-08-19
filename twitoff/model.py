@@ -30,7 +30,7 @@ class Tweet(DB.Model):
     # user will have a tweets field --- will not be stored in data based, but
     # loaded lazily
     # That's the job of backref: when we interact --instance class the user class will have a tweet field and the
-    # twee class will have a user field.
+    # tweet class will have a user field.
     user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
 
     # helps us get user directly.

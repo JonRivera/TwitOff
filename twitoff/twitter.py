@@ -41,8 +41,8 @@ def add_or_update_user(username):
                                                 model='twitter')
             db_tweet = Tweet(id=tweet.id, text=tweet.full_text[:300],
                              embedding=embedding)
-            db_user.tweets.append(db_tweet)
-            DB.session.add(db_tweet)
+            db_user.tweets.append(db_tweet) # memory, ram
+            DB.session.add(db_tweet) # in data base
     except Exception as e:
         print('Error processing {}: {}'.format(username, e))
         raise e
