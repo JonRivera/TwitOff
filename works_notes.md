@@ -20,7 +20,9 @@ What was the most challenging part of the work today, and why?
 Following the instructors python logic. Largely b/c I am still fairly new at working with apis. I encounter some bags in ,env where I had : when I should have had an =, also had bug where  b/c I did't rest my table it didn't want to data base didn't want to accept the changes of having new fields.
 
 
-08/19
-What went well (in the context of working on the assignment) today?
+08/19 Adding Data Science to Web App
+What went well (in the context of working on the assignment) today? I was able to reproduce code; specifically, I was able to make predictions of what tweet corresponded to who.
 What was particularly interesting or surprising about the topic(s) today?
+I was surprise at how accurate the logistic model is able to predict which tweet corresponds to which user. Its also surprisesing how Basilica is able to encoded the tweets to begin with.
 What was the most challenging part of the work today, and why?
+Making sure functions were properly setup, understanding the python logic behind functions etc. 
