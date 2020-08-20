@@ -1,8 +1,8 @@
 from decouple import config
 from flask import Flask, render_template, request
-from .twitter import insert_example_users
+from .twitter import insert_example_users, add_or_update_user
 from .model import DB, User
-from .twitter import add_or_update_user
+from .predict import predict_user
 
 
 def create_app():
@@ -23,6 +23,22 @@ def create_app():
         return render_template('base.html', title='Home', users=User.query.all())
         # return 'Hello TwitOff!'
 
+    @app.route('/compare', methods=['POST'])
+    def compare():
+        user1, user2 = sorted([request.values['user1'],
+                               request.values['user2']])
+        # error handling
+        if user1 == user2:
+            message = 'Cannot compare a user to themselves!'
+        else:
+            prediction = predict_user(user1, user2,
+                                      request.values['tweet_text'])
+            message = '"{}" is more likely to be said by {} than {}'.format(
+                request.values['tweet_text'], user1 if prediction else user2,
+                user2 if prediction else user1)
+        return render_template('prediction.html', title='Prediction',
+                               message=message)
+
     @app.route('/update')
     def update():
         # Reset the database
@@ -32,7 +48,7 @@ def create_app():
     # decorating twice, decor are functions that take functions return functions
     # to add users we need a post request
     # to get users were going to need a get request
-    # The get request needs a parameter but the post doesn't, b/c when we add a use
+    # The get request needs a parameter but the post doesn't, b/c when we add a user
     # were going to have a form
     # The name needs a default value,b/c might not exit, exist with get rec but not for post
     @app.route('/user', methods=['POST'])

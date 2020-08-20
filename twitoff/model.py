@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 DB = SQLAlchemy()
 
 
-class User(DB.Model):
+class User(DB.Model):  
     """Twitter users that we pull and analyze Tweets for"""
     id = DB.Column(DB.Integer, primary_key=True)
     name = DB.Column(DB.String(15), nullable=False)
