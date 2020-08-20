@@ -13,6 +13,7 @@ scikit-learn = "*"
 basilica = "*"
 flask = "*"
 flask-sqlalchemy = "*"
+tweepy = "*"
 
 [requires]
 python_version = "3.7"
