@@ -15,7 +15,7 @@ class User(DB.Model):
 
     def __repr__(self):
         return '-User {}-'.format(self.name)
-        # self b/c were inside the class
+        # self b/c were inside the classpip
         # Now we will see the user's name
 
 
@@ -28,7 +28,7 @@ class Tweet(DB.Model):
     user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'), nullable=False)
     # tweet.user, we can get user directly
     # user will have a tweets field --- will not be stored in data based, but
-    # loaded lazily
+    # loaded lazily, tweets will have a user field
     # That's the job of backref: when we interact --instance class the user class will have a tweet field and the
     # tweet class will have a user field.
     user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
