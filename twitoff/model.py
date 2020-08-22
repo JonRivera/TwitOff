@@ -36,6 +36,6 @@ class Tweet(DB.Model):
     # helps us get user directly.
 
     def __repr__(self):
-        return '-Twe et {}-'.format(self.text)
+        return '-Tweet {}-'.format(self.text)
 
 
