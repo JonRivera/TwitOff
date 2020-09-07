@@ -22,4 +22,4 @@ def predict_user(user1_name, user2_name, tweet_text):
     log_reg = LogisticRegression().fit(embeddings, labels)
     # we don data science and made a prediction
     tweet_embedding = BASILICA.embed_sentence(tweet_text, model='twitter')
-    return log_reg.predict(np.array(tweet_embedding).reshape(1,-1))
+    return log_reg.predict(np.array(tweet_embedding).reshape(1, -1))
